@@ -11,7 +11,9 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @NoArgsConstructor
 public class Quiz {
+    long id;
     String title;
     String text;
     List<String> options;
+    int answer;
 }
