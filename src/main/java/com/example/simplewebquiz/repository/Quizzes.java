@@ -15,10 +15,9 @@ public class Quizzes {
         return quizList;
     }
 
-    public Quiz add(Quiz quiz) {
+    public void add(Quiz quiz) {
         quiz.setId(quizList.size() + 1);
         quizList.add(quiz);
-        return quiz;
     }
 
     public Quiz getById(long id) {

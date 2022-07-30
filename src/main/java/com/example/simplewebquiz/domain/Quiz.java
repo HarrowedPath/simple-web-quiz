@@ -15,5 +15,5 @@ public class Quiz {
     String title;
     String text;
     List<String> options;
-    int answer;
+    List<Integer> answer;
 }

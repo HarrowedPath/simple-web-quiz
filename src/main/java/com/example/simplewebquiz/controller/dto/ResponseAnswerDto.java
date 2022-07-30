@@ -1,18 +1,16 @@
 package com.example.simplewebquiz.controller.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-import java.util.List;
-
-@Data
 @Builder
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class ResponseQuizDto {
-    long id;
-    String title;
-    String text;
-    List<String> options;
+public class ResponseAnswerDto {
+    @JsonProperty("success")
+    Boolean status;
+    String feedback;
 }
