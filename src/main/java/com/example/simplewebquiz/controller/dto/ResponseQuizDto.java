@@ -11,7 +11,7 @@ import java.util.List;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class ResponseQuizDto {
-    long id;
+    Long id;
     String title;
     String text;
     List<String> options;

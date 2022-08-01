@@ -1,0 +1,16 @@
+spring:
+  datasource:
+    url: jdbc:h2:file:./src/main/java/com/example/simplewebquiz/db/quiz
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: password
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  h2:
+    console:
+      enabled: true
+      settings:
+        trace: false
+        web-allow-others: false

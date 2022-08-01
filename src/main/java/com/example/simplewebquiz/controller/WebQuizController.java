@@ -8,7 +8,7 @@ import com.example.simplewebquiz.controller.mapper.AnswerMapper;
 import com.example.simplewebquiz.controller.mapper.RequestQuizMapper;
 import com.example.simplewebquiz.controller.mapper.ResponseQuizMapper;
 import com.example.simplewebquiz.exception.NotFoundException;
-import com.example.simplewebquiz.repository.Quizzes;
+import com.example.simplewebquiz.service.QuizService;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -30,28 +30,28 @@ public class WebQuizController {
     ResponseQuizMapper responseQuizMapper;
     AnswerMapper answerMapper;
     RequestQuizMapper requestQuizMapper;
-    Quizzes quizzes;
+    QuizService quizService;
 
     @PostMapping
     public ResponseQuizDto addQuiz(@RequestBody @Valid RequestQuizDto newQuizDto) {
         val quiz = requestQuizMapper.toModel(newQuizDto);
-        quizzes.add(quiz);
+        quizService.save(quiz);
         return responseQuizMapper.toDto(quiz);
     }
 
     @GetMapping
     public List<ResponseQuizDto> getAllQuizzes() {
-        return responseQuizMapper.allToDto(quizzes.getQuizList());
+        return responseQuizMapper.allToDto(quizService.findAll());
     }
 
     @GetMapping("/{id}")
-    public ResponseQuizDto getQuiz(@PathVariable long id) {
-        return responseQuizMapper.toDto(quizzes.getById(id));
+    public ResponseQuizDto getQuiz(@PathVariable Long id) {
+        return responseQuizMapper.toDto(quizService.findById(id));
     }
 
     @PostMapping("/{id}/solve")
-    public ResponseEntity<ResponseAnswerDto> solveQuiz(@RequestBody RequestAnswerDto answer, @PathVariable long id) {
-        val quiz = quizzes.getById(id);
+    public ResponseEntity<ResponseAnswerDto> solveQuiz(@RequestBody RequestAnswerDto answer, @PathVariable Long id) {
+        val quiz = quizService.findById(id);
         val result = answerMapper.toDto(answer, quiz).orElseThrow(() -> new NotFoundException("not found"));
         return ResponseEntity.ok(result);
     }

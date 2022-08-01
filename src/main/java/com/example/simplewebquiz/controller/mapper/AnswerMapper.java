@@ -5,22 +5,14 @@ import com.example.simplewebquiz.controller.dto.ResponseAnswerDto;
 import com.example.simplewebquiz.domain.Quiz;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 @Component
 public class AnswerMapper {
     public Optional<ResponseAnswerDto> toDto(RequestAnswerDto answer, Quiz quiz) {
-        if(quiz == null) {
-            return Optional.of(ResponseAnswerDto.builder()
-                    .status(true)
-                    .feedback("Congratulations, you're right!")
-                    .build());
-        }
-        if(answer.getAnswer().isEmpty()) {
-            return Optional.of(ResponseAnswerDto.builder()
-                    .status(true)
-                    .feedback("Congratulations, you're right!")
-                    .build());
+        if(quiz.getAnswer()== null) {
+            quiz.setAnswer(new ArrayList<>());
         }
         if (quiz.getAnswer().equals(answer.getAnswer())) {
             return Optional.of(ResponseAnswerDto.builder()
