@@ -1,6 +1,7 @@
 package com.example.simplewebquiz.service;
 
 import com.example.simplewebquiz.domain.Quiz;
+import com.example.simplewebquiz.exception.QuizNotFoundException;
 import com.example.simplewebquiz.repository.QuizRepository;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -15,10 +16,19 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 @AllArgsConstructor
 public class QuizService {
+
     QuizRepository quizRepository;
 
     public Quiz findById(Long id) {
         return quizRepository.findById(id).orElseThrow();
+    }
+
+    public  void delete(Long id) {
+        if (quizRepository.existsById(id)) {
+            quizRepository.deleteById(id);
+            return;
+        }
+        throw new QuizNotFoundException();
     }
 
     public void save (Quiz toSave) {

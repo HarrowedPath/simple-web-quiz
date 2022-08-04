@@ -1,10 +1,10 @@
 package com.example.simplewebquiz.repository;
 
-import com.example.simplewebquiz.domain.Quiz;
+import com.example.simplewebquiz.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface QuizRepository extends JpaRepository<Quiz, Long> {
+public interface UserRepository extends JpaRepository<User, String> {
 
 }

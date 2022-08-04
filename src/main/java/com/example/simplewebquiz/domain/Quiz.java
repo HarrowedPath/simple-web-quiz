@@ -1,30 +1,38 @@
 package com.example.simplewebquiz.domain;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Objects;
 
 @Getter
 @Setter
-@ToString
-@RequiredArgsConstructor
+@AllArgsConstructor
 @Entity
-@Table(name = "QUIZ")
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @NoArgsConstructor
 public class Quiz {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     Long id;
+
     @Lob
+    @NotEmpty
     String title;
+
+    @NotEmpty
     @Lob
     String text;
 
+    @NotNull
     @ElementCollection
     @CollectionTable(name = "QUIZ_OPTIONS", joinColumns = @JoinColumn(name = "QUIZ_ID"))
     @Column(name = "QUIZ_OPTION")
@@ -33,9 +41,14 @@ public class Quiz {
     @ElementCollection
     @CollectionTable(
             name = "QUIZ_ANSWERS",
-            joinColumns = @JoinColumn(name = "QUIZ_ID") )
+            joinColumns = @JoinColumn(name = "QUIZ_ID"))
     @Column(name = "QUIZ_ANSWER")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     List<Integer> answer;
+
+    @ManyToOne
+    @JoinColumn(name = "USER_ID", nullable = false)
+    private User user;
 
     @Override
     public boolean equals(Object o) {

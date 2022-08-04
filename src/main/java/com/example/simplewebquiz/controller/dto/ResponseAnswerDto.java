@@ -10,7 +10,9 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class ResponseAnswerDto {
+
     @JsonProperty("success")
     Boolean status;
+
     String feedback;
 }
