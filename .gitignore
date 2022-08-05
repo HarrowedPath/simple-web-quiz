@@ -25,7 +25,7 @@ bin/
 out/
 !**/src/main/**/out/
 !**/src/test/**/out/
-!**/src/main/java/com/example/simplewebquiz/db
+!**/src/main/java/com/example/simplewebquiz/db/
 
 ### NetBeans ###
 /nbproject/private/
