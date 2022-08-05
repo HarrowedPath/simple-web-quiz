@@ -1,5 +1,6 @@
 package com.example.simplewebquiz.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -13,14 +14,16 @@ import java.util.List;
 @Getter
 @Setter
 public class User {
-
     @Id
     String email;
 
     String password;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     List<Quiz> quizList;
 
     String role;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    List<Solve> completions;
 }

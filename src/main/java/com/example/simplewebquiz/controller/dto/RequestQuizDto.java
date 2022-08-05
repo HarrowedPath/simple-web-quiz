@@ -15,7 +15,6 @@ import java.util.List;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class RequestQuizDto {
-
     @NotEmpty
     String title;
 

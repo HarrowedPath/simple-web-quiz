@@ -12,8 +12,7 @@ import javax.validation.constraints.Size;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class RequestUserDto {
-
+public class UserDto {
     @Email(regexp = "\\w+@\\w+\\.\\w+")
     @NotNull
     String email;

@@ -16,8 +16,7 @@ import javax.transaction.Transactional;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 @AllArgsConstructor
 public class UserService {
-
-     UserRepository userRepository;
+    UserRepository userRepository;
 
     public void registerNewUser(User user) {
         if (userRepository.existsById(user.getEmail())) {
@@ -26,7 +25,7 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public User get(String email) {
+    public User findById(String email) {
         return userRepository
                 .findById(email)
                 .orElseThrow(UserNotFoundException::new);

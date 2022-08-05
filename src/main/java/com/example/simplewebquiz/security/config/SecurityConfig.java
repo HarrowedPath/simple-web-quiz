@@ -41,7 +41,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .headers().frameOptions().disable()
                 .and().authorizeRequests()
                 .antMatchers(HttpMethod.POST, "/api/register", "/actuator/shutdown").anonymous()
-                .antMatchers( "/h2-console/**").hasRole("ADMIN")
+                .antMatchers("/h2-console/**").hasRole("ADMIN")
                 .and().authorizeRequests()
                 .anyRequest().authenticated();
     }

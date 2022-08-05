@@ -1,21 +1,19 @@
 package com.example.simplewebquiz.controller.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-import java.util.List;
+import java.time.LocalDateTime;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class ResponseQuizDto {
-    Long id;
+public class SolveDto {
+    @JsonProperty(value = "id")
+    Long quizId;
 
-    String title;
-
-    String text;
-
-    List<String> options;
+    LocalDateTime completedAt;
 }
